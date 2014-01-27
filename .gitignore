@@ -1,0 +1,9 @@
+# Compiled files
+*.py[cod]
+
+# Data
+*.raw
+
+# Others
+settings.py
+*.markdown
