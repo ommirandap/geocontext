@@ -1,5 +1,5 @@
 # Compiled files
-*.py[cod]
+*.pyc
 
 # Data
 *.raw
