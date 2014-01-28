@@ -54,3 +54,9 @@ Journal
 
 - Daily Work
 	* El archivo db-interactions.py incluye retrieval desde la DB para obtener los eventos del día y sus tweets asociados
+
+
+### Day 20 - Lunes 27 Enero 2014
+
+- Reunión Diaria
+	* Se pensaron maneras de armar la BD de lugares considerando las distintas jerarquías de cada país
