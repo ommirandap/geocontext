@@ -1,5 +1,5 @@
 from datetime import date, datetime, time
-import json, MySQLdb, re
+import json, MySQLdb, re, pprint
 import settings as k
 from Event import Event
 from dstk import DSTK
@@ -145,8 +145,9 @@ def main():
 		#Dict_ID_Keywords[row[0]] = row[1]
 	
 	for everyEvent in Array_Events:
-		print Count_Dict
 		getLocationFromDSTK(cursor, everyEvent, Count_Dict)
+
+	pprint.pprint(Count_Dict)
 
 	# ID de usuarios que twitearon en el evento[0]
 	#List_Users = getUsersIDByEvent(cursor, Array_Events[0].getID())
