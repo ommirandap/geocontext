@@ -62,7 +62,8 @@ def deleteTextFromWord(word):
 			continue
 		else:
 			non_filtered.append(char)
-	
+	if non_filtered[0] == '.':
+		non_filtered[0] = ' '
 	return ("".join(non_filtered)).strip()
 
 def getCoordinatesFromCleanText(word):
@@ -73,6 +74,8 @@ def getCoordinatesFromCleanText(word):
 
 def normalizeGeocoordenates(word):
 	"""Returns GeoCoordinate as a text from a GeoCoordinate-style word."""
+	word = word.replace("U.T:", "")
+	word = word.replace("i12T:", "")
 	word_wout_text = deleteTextFromWord(word)
 	if word_wout_text != '':
 		almostClean = getCoordinatesFromCleanText(word_wout_text)
