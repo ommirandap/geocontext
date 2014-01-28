@@ -12,27 +12,26 @@ COORD_REGEX = re.compile('([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1
 STRICT_COORD_REGEX = re.compile('^(([-+]?[\d]{1,2}(\.)(\d+))((,)(\s*))(([-+]?)([\d]{1,3})(\.)(\d+)))')
 
 def punctuationToSpace(word):
-	before_table = string.punctuation
-	after_table =  "                                " # 32 spaces
-	translation_table = maketrans(before_table, after_table)
-	return word.translate(translation_table)
+	""" Replace every punctuation symbol for a space """
+	input_table = string.punctuation
+	output_table =  "                                " # 32 spaces
+	translation_table = maketrans(input_table, output_table)
+	translated_word = word.translate(translation_table)
+	return translated_word
 
 def reduceSpaces(word):
+	""" Given a word with many concatenated spaces, returns the same word with all the spaces reduced to 1 """
 	return re.sub('\s+', ' ', word)
 
 def normalize(word):
-	str1 = punctuationToSpace(word)
-	str2 = reduceSpaces(str1)
-	str3 = string.lower(str2)
-	str4 = str3.strip()
-	return str4
+	""" Given any word, return the same word without punctuation, all 1+ spaces to 1 spaces, lowercased and stripped """
+	word_stage1 = punctuationToSpace(word)
+	word_stage2 = reduceSpaces(word_stage1)
+	word_stage3 = string.lower(word_stage2)
+	word_stage4 = word_stage3.strip()
+	return word_stage4
 
-def onlyNumbers(word):
-	match = re.search('[a-zA-Z]', word)
-	if match:	return False
-	else:		return True
-
-def isCoordinates(word):
+def hasCoordinates(word):
 	match = COORD_REGEX.search(word)
 	if match:	return True
 	else:		return False
@@ -92,7 +91,7 @@ copyline = line
 
 while line:
 	
-	if isCoordinates(line):
+	if hasCoordinates(line):
 		rawGeoCoord.append(line)
 		n_useful = n_useful + 1
 		line = input_data.readline()
@@ -126,8 +125,8 @@ input_data.close()
 output_data.close()
 
 output_geocoord = open(filepath + out_filename_gcoord, 'w')
-for i in rawGeoCoord:
-	cleaned = normalizeGeocoordenates(i)
+for elem in rawGeoCoord:
+	cleaned = normalizeGeocoordenates(elem)
 	if cleaned != '':
 		validGeoCoord.append(cleaned)
 		output_geocoord.write(cleaned + '\n')
