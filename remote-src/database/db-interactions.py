@@ -5,6 +5,7 @@ from Event import Event
 from dstk import DSTK
 from GeoPoint import GeoPoint
 import CountryCodes as CD
+import LocationCleaner
 
 # >
 # <
@@ -103,14 +104,14 @@ def getLocationFromDSTK(cursor, anEvent, Count_Dict):
 		if probableCoord == None:
 			List_Tweets_Coordenatesless.append(tweetID[0])
 		else:
-			geoPointFromCoord = GeoPoint.from_string(probableCoord)
+			geoPointFromCoord = GeoPoint.initFromString(probableCoord)
 			List_Tweets_Coordenatesful.append(tweetID[0])
 			Dict_Tweets_Coordenatesful[tweetID[0]] = geoPointFromCoord
 
 	dstk = DSTK()
 	for ID in Dict_Tweets_Coordenatesful.keys():
 		geoPointFromID = Dict_Tweets_Coordenatesful[ID]
-		geoPointForQuery = geoPointFromID.toArrayForDSTK()
+		geoPointForQuery = [geoPointFromID.getLatitude(), geoPointFromID.getLongitude()]
 		coordinates_dstk = dstk.coordinates2politics(geoPointForQuery)
 		if coordinates_dstk[0]["politics"] is not None:
 			result = coordinates_dstk[0]["politics"][0]["name"]
@@ -145,28 +146,22 @@ def main():
 		#Dict_ID_Keywords[row[0]] = row[1]
 	
 	for everyEvent in Array_Events:
-		getLocationFromDSTK(cursor, everyEvent, Count_Dict)
+		#getLocationFromDSTK(cursor, everyEvent, Count_Dict)
 
-	pprint.pprint(Count_Dict)
-
-	# ID de usuarios que twitearon en el evento[0]
-	#List_Users = getUsersIDByEvent(cursor, Array_Events[0].getID())
-	
-	#List_Locations = []
-
-	#for ite_list_users in List_Users:
-		#print ite_list_users
-	#	volat = getLocationFromUserID(cursor, ite_list_users[0])
-		#print volat[0]
-	#	List_Locations.append(volat[0])
-
-	#for i in List_Locations:
-	#	print i
-
-
-
-
+		# ID de usuarios que twitearon en el evento[0]
+		List_Users = getUsersIDByEvent(cursor, everyEvent.getID())
+		for user in List_Users:
+			locationOfUser = getLocationFromUserID(cursor, user[0])
+			effectiveLoc = locationOfUser[0]
+			cleanedLoc = LocationCleaner.cleanLocationField(effectiveLoc)
+			if type(cleanedLoc) == str:
+				print "Input: %s \t Result String: %s" % (effectiveLoc, cleanedLoc)
+			if type(cleanedLoc) == GeoPoint:
+				print "Input: %s \t Result GeoPoint: %s" % (effectiveLoc, str(cleanedLoc))
+			if cleanedLoc == None:
+				print "Input: Useless = %s \t Result None" % effectiveLoc
 	db.close()
+
 
 if __name__ == "__main__":
 	main()
