@@ -124,7 +124,7 @@ def getLocationFromDSTK(cursor, anEvent, Count_Dict):
 		else:
 			Count_Dict[code] = 1 
 		
-		#print "Event: %s\t analizing: %s \t from = %s code = %s" % (anEvent.getKeywords(), str(geoPointForQuery), result, code) 
+		print "Event: %s\t analizing: %s \t from = %s code = %s" % (anEvent.getKeywords(), str(geoPointForQuery), result, code) 
 	
 
 
