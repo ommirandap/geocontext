@@ -17,14 +17,14 @@ Journal
 
 ### Day 2 - Martes 7 Enero 2014
 
-- Reunion diaria
+- Daily Meeting
 	* Muestra del trabajo del día anterior
 	* Feedback con respecto a mantener las cosas en formato JSON **válido** o texto
 - Reunion (Profe)
 	- Esta semana de exploración
 	- Hablar con Jheser y Eduardo sobre lo que hacen ellos
-	- [ ] Revisar Google BigQuery
-	- [ ] Analizar las posibilidades y hacer un plan para las semanas sgtes
+	- [ ] Revisar Google Analizar
+	- [ ] BigQuery las posibilidades y hacer un plan para las semanas sgtes
 	- [ ] Sacar estadísticas (usuarios/lugares que se repiten)
 	- [ ] Buscar BD grandes con ubicaciones (*DSTK, Geonames, etc*)
 	- `Idea de la profe:` Hacer matching y el resto clasificación
@@ -35,7 +35,7 @@ Journal
 
 ### Day 3 - Miércoles 8 Enero 2014
 
-- Reunion diaria
+- Daily Meeting
 	* Notamos que tal vez haya un error en la recolección ya que a priori hay tweets que se repiten
 	* Seguir con el trabajo de exploración para corroborar si es un error de recolección o error mío
 	* [ ] Esperar alguna info sobre la recolección en cuboid
@@ -48,7 +48,7 @@ Journal
 
 ### Day 15 - Lunes 20 Enero 2014
 
-- Reunión Diaria
+- Daily Meeting
 	* Se analizó lo que se tenía hasta el momento, para comenzar a armar el sistema completo
 	* Se está bajando e instalando la maquina virtual de DSTK
 
@@ -58,5 +58,16 @@ Journal
 
 ### Day 20 - Lunes 27 Enero 2014
 
-- Reunión Diaria
+- Daily Meeting	
 	* Se pensaron maneras de armar la BD de lugares considerando las distintas jerarquías de cada país
+
+- Daily Work
+	* Se trabaja en una BD de los dumps de GeoNames, que consta de 3 tablas (Pais, Jerarquía 2, Jerarquía 3)
+	* Se subió el trabajo a [GitHub](http://www.github.com/ommirandap/geocontext)
+
+### Day 21 - Martes 28 Enero 2014
+- Reunión Diaria
+	* Se tomó el consenso de sólo tener una tabla que asocie el TweetID con la Locacion
+
+- Daily Work
+
