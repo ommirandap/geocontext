@@ -55,6 +55,16 @@ Journal
 - Daily Work
 	* El archivo db-interactions.py incluye retrieval desde la DB para obtener los eventos del día y sus tweets asociados
 
+### Day 17 - Miércoles 22 Enero 2014
+
+- Workshop KDW-PRISMA (Todo el día)
+	* Presentaciones relacionadas de Jheser, Mauricio y Francisco (anotaciones en cuaderno)
+
+### Day 18 - Jueves 23 Enero 2014
+
+- Workshop ObjectProfile & Pharo Sprint
+	* Interesantes visualizaciones en Roassal (Equipo de ObjectProfile)
+	* Se trabajó con Alex y Pablo en una ágil visualización para los location-ocurrences (smalltalkhub)
 
 ### Day 20 - Lunes 27 Enero 2014
 
