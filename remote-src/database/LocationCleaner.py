@@ -103,16 +103,3 @@ def cleanLocationField(LocationFieldFromUser):
 	else:
 		result = normalizeString(LocationFieldFromUser)
 	return result
-
-
-def main():
-	ble = sys.argv[1]
-	if hasCoordinates(ble):
-		print normalizeGeocoordenates(ble)
-		print type(getAsGeoPoint(normalizeGeocoordenates(ble)))
-	else:
-		print "ble"
-
-
-if __name__ == "__main__":
-	main()
