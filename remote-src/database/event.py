@@ -29,9 +29,13 @@ class Event(object):
         return self.eventID
 
     def getKeywords(self):
-    	"""Returns the couple of keywords of the Event (1 string)."""
+    	"""
+        Returns the couple of keywords of the Event (1 string).
+        """
     	return self.keywords
 
     def getDatetime(self):
-    	"""Returns the datetime when the Event was added to the DB (datetime)."""
+    	"""
+        Returns the datetime when the Event was added to the DB (datetime).
+        """
     	return self.datetime
