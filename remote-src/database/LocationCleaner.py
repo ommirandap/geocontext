@@ -4,7 +4,6 @@
 import string, re, sys
 from string import maketrans
 from GeoPoint import GeoPoint
-from operator import itemgetter
 
 COORD_REGEX = re.compile(
 	'([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)'
