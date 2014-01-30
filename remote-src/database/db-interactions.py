@@ -138,7 +138,8 @@ def getLocationFromDSTK(cursor, anEvent, Count_Dict):
 """ ----------------------------------------------------------------------- """
 
 def main():
-	db = MySQLdb.connect(k.DB_HOST, k.DB_USER, k.DB_KEY, k.DB_NAME)
+	db = MySQLdb.connect(k.MYSQLDB_HOST, k.MYSQLDB_USER, 
+							k.MYSQLDB_KEY, k.MYSQLDB_NAME)
 	cursor = db.cursor()
 	Array_ID_events = []
 	Dict_ID_Keywords = {}
