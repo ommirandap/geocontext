@@ -90,6 +90,12 @@ def getCoordinatesFromTweetID(cursor, ID_tweet):
 	except MySQLdb.Error:
 		print "Error: unable to fetch data"
 		return -1
+#TODO
+def saveTweetIDAndLocation(cursor, IDTweet, Location):
+	"""
+	Take an IDTweet with a Location Object and record it to the Local DB.
+	"""
+	pass
 
 def getLocationFromDSTK(cursor, anEvent, Count_Dict):
 	
