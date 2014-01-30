@@ -15,7 +15,9 @@ Output 	-> Location de los tweets relacionados a un evento
 			* db-interactions::getEventsBetweenTwoDateTimes
 			* db-interactions::getTweetsIDByEvent
 		[ ] IDs eventos del día 		-> IDs Usuarios que twitearon
+			
 		[ ] IDs eventos del día 		-> Lista de tweets con coordinates
+			
 		[ ] IDs Usuarios que twitearon 	-> Location field de esos usuarios
 
 * Paso 2.1 : 
