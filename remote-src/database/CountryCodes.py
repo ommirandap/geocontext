@@ -3,7 +3,6 @@
 
 import string, random
 
-
 COUNTRIES_DICT = {
 	'AD':'Andorra',
 	'AE':'United Arab Emirates',
@@ -280,9 +279,3 @@ def searchByCode(str):
 		return COUNTRIES_DICT[str]
 	else:
 		return None
-
-#for i in range(1, 5000000):
-#	vol = id_generator()
-#	svol = searchByCode(vol)
-#	ssvol = searchByName(svol)
-#	print("%s = %s = %s" % (vol, svol, ssvol))
