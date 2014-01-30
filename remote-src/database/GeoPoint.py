@@ -16,7 +16,7 @@ class GeoPoint(object):
             self.latitude   = constructor[1]
 
     def __str__(self):
-        """Method docstring."""
+        """Returns the GeoPoint as a String \"longitude,latitude\"."""
         return str(self.longitude)+ "," + str(self.latitude)
     
     @classmethod
@@ -46,54 +46,30 @@ class GeoPoint(object):
 
     @classmethod
     def from_values(cls, longitude_value, latitude_value):
+        """
+        Calls the constructor of GeoPoint, giving an array of [Long,Lat] 
+        from two parameters as values.
+        """
         return cls([longitude_value, latitude_value])
 
-    def toStringForDSTK(self):
-        """Method docstring."""
-        return str(self.latitude)+ ", " + str(self.longitude)
-
-    def toArray(self):
-        """ Return the object as an array [Longitude, Latitude] """
-        points = [0.0, 0.0]
-        points[0] = self.longitude
-        points[1] = self.latitude
-        return points
-
     def toGeoJSON(self):
-        """ """
+        """Dumps the GeoPoint object to a JSON on GeoJSON's style."""
         defaultDict = {"type": "Point"}
         defaultDict["coordinates"]=self.toArray()
         return json.dumps(defaultDict)
 
     def getLatitude(self):
-        """ Returns the Latitude of the point """
+        """Returns the Latitude of the GeoPoint."""
         return self.latitude
 
     def getLongitude(self):
-    	""" Returns the Longitude of the point """
+        """Returns the Longitude of the GeoPoint."""
     	return self.longitude
 
     def setLatitude(self, latitude):
-        """ Returns the Latitude of the point """
+        """Set the Longitude of a GeoPoint."""
         self.latitude = latitude
 
     def setLongitude(self, longitude):
-        """ Returns the Longitude of the point """
+        """Set the Latitude of a GeoPoint."""
         self.longitude = longitude
-
-
-"""
-def main():
-
-    a = GeoPoint.from_values(23.14123,-82.12343)
-    a = GeoPoint.__init__from_string("23.14123 -82.12343")
-    print str(a)
-    ble = json.loads(a.toGeoJSON())
-    print ble["type"]
-    print a.toArray()
-    print a.getLatitude()
-    print a.getLongitude()
-
-if __name__ == "__main__":
-    main()
-"""
