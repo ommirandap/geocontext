@@ -14,7 +14,8 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import MySQLdb, string, StringIO
+#import MySQLdb
+import string, StringIO
 import geodict_config
 from tempfile import TemporaryFile
 from struct import unpack, pack, calcsize
