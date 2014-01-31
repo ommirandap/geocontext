@@ -4,69 +4,10 @@
 import string, re
 from string import maketrans
 from operator import itemgetter
-
-""" Function declarations """
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-COORD_REGEX = re.compile('([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)')
-STRICT_COORD_REGEX = re.compile('^(([-+]?[\d]{1,2}(\.)(\d+))((,)(\s*))(([-+]?)([\d]{1,3})(\.)(\d+)))')
-
-def punctuationToSpace(word):
-	""" Replace every punctuation symbol for a space """
-	input_table = string.punctuation
-	output_table =  "                                " # 32 spaces
-	translation_table = maketrans(input_table, output_table)
-	translated_word = word.translate(translation_table)
-	return translated_word
-
-def reduceSpaces(word):
-	""" Given a word with many concatenated spaces, returns the same word with all the spaces reduced to 1 """
-	return re.sub('\s+', ' ', word)
-
-def normalize(word):
-	""" Given any word, return the same word without punctuation, all 1+ spaces to 1 spaces, lowercased and stripped """
-	word_stage1 = punctuationToSpace(word)
-	word_stage2 = reduceSpaces(word_stage1)
-	word_stage3 = string.lower(word_stage2)
-	word_stage4 = word_stage3.strip()
-	return word_stage4
-
-def hasCoordinates(word):
-	match = COORD_REGEX.search(word)
-	if match:	return True
-	else:		return False
-
-def deleteTextFromWord(word):
-	ret_list = []
-	word = string.lower(word)
-	""" punctuation_filter = string.punctuation - {',','.','-'} """
-	punctuation_filter = '!"#$%&\'()*+/:;<=>?@[\\]^_`{|}~'
-	ascii_punctuation_filter = string.ascii_lowercase + punctuation_filter
-	for letter in list(word):
-		if letter in ascii_punctuation_filter:
-			continue
-		else:
-			ret_list.append(letter)
-	return ("".join(ret_list)).strip()
-
-def getCoordinatesFromCleanText(word):
-	match = STRICT_COORD_REGEX.search(word)
-	if match:	return STRICT_COORD_REGEX.search(word).group(0)
-	else:		return ''
-
-def normalizeGeocoordenates(word):
-	str1 = deleteTextFromWord(word)
-	if str1 != '':
-		almostClean = getCoordinatesFromCleanText(str1)
-		cleaned = almostClean.replace(" ","")
-		return cleaned
-	else: 
-		return ''
+import LocationCleaner as LC
 
 def sbv6(d,reverse=False):
     return sorted(d.iteritems(), key=itemgetter(1), reverse=True)
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 #filepath = '/home/vpena/Omar/geocontext/data/'
 #filename = 'sorted-locations.out'
@@ -91,16 +32,16 @@ copyline = line
 
 while line:
 	
-	if hasCoordinates(line):
+	if LC.hasCoordinates(line):
 		rawGeoCoord.append(line)
 		n_useful = n_useful + 1
 		line = input_data.readline()
 		copyline = line
 		continue
 
-	norm_word = normalize(line)
+	norm_word = LC.normalizeString(line)
 	
-	if norm_word == '':
+	if norm_word == None:
 		#output_data.write("Original: " + copyline.strip()+" \t\tResult: nothing to retreive\n")
 		n_useless = n_useless + 1
 		line = input_data.readline()
@@ -126,11 +67,12 @@ output_data.close()
 
 output_geocoord = open(filepath + out_filename_gcoord, 'w')
 for elem in rawGeoCoord:
-	cleaned = normalizeGeocoordenates(elem)
-	if cleaned != '':
+	cleaned = LC.normalizeGeocoordenates(elem)
+	if cleaned != None:
 		validGeoCoord.append(cleaned)
 		output_geocoord.write(cleaned + '\n')
-	else:	continue
+	else:	
+		continue
 output_geocoord.close()
 
 location_dict['GEOCOORDENATES'] = len(validGeoCoord)
