@@ -4,12 +4,12 @@
 source_folder = 'source_data/'
 
 # Your MySQL user credentials
-user = 'galean'
-password = '1234'
+user = 'ommirandap'
+password = 'geoDB'
 
 # The address and port number of your database server
 host = 'localhost'
 port = 0
 
 # The name of the database to create
-database = 'geodict2'
+database = 'geoDB'
