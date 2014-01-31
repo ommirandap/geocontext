@@ -83,7 +83,7 @@ def getTweetsIDByEvent(connection, ID_Event):
 
 def getUsersIDByEvent(connection, ID_Event):
 	"""
-	Returns all the 
+	Returns all the users that tweeted on a certain event (given the Event ID).
 	"""
 	try:
 		cursor = connection.cursor()
@@ -94,6 +94,9 @@ def getUsersIDByEvent(connection, ID_Event):
 		return -1
 
 def getLocationFromUserID(connection, ID_User):
+	"""
+	Returns the Location field from a user's profile (of a specific User ID).
+	"""
 	try:
 		cursor = connection.cursor()
 		cursor.execute(Q_LOCATION_FROM_USER + str(ID_User))
@@ -103,6 +106,10 @@ def getLocationFromUserID(connection, ID_User):
 		return -1
 
 def getCoordinatesFromTweetID(connection, ID_tweet):
+	"""
+	If a certain tweet contains the "coordinates" field activated, then returns 
+	it. Otherwise, returns None.
+	"""
 	try:
 		cursor = connection.cursor()
 		cursor.execute(Q_COORD_FROM_TWEET + str(ID_tweet))
@@ -132,9 +139,11 @@ def getLocationFromDSTK(connection, anEvent, Count_Dict):
 	List_Tweets_Coordenatesless = []
 
 	List_Tweets = getTweetsIDByEvent(connection, anEvent.getID())
+	
 	for tweetID in List_Tweets:
 		cursor = connection.cursor()
 		probableCoord = getCoordinatesFromTweetID(cursor, tweetID[0])
+		
 		if probableCoord == None:
 			List_Tweets_Coordenatesless.append(tweetID[0])
 		else:

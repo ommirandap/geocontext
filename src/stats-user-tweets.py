@@ -1,16 +1,16 @@
 import string
 
-""" This script is for process an output file from the Query N1 (queries.md) an obtain statistics about the impact of users on our database"""
+"""
+This script is for process an output file from the Query N1 (queries.md) 
+an obtain statistics about the impact of users on our database.
+"""
 
-#path = "/home/vpena/Omar/geocontext/" 				path on postgrade's lab
-#path = "/home/ommirandap/KDW-PRISMA/geocontext/" 	path on my laptop
-#path = "/home/omiranda/geocontext/" 				path on prisma server
 datapath = "../data/"
 filename = "n_users_with_ntweets.out"
 
 input_data = open(datapath+filename, 'r')
 
-""" First line is just a header """
+"""First line is just a header."""
 input_data.readline()
 
 #quantity = [0, 0, 0, 0, 0, 0, 0, 0]

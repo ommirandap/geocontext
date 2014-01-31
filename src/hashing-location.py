@@ -13,10 +13,10 @@ def sbv6(d,reverse=False):
 #filename = 'sorted-locations.out'
 filepath = '../data/'
 infilename = 'sorted-locations.out'
-outfilename = 'processed-sorted-locations.out'
-out_filename_location = 'location-ocurrences.out'
+outfilename = 'processed-sorted-locations.out2'
+out_filename_location = 'location-ocurrences.out2'
 #out_filename_gcoord = 'geolocation-data.out'
-out_filename_gcoord = 'geoclean.out'
+out_filename_gcoord = 'geoclean.out2'
 
 input_data  = open(filepath + infilename, 'r')
 output_data = open(filepath + outfilename, 'w')

@@ -1,12 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 
-import string, random
+import string
 
-def id_generator(size=2, chars=string.ascii_uppercase):
-	return ''.join(random.choice(chars) for x in range(size))
+"""
+This is just a dummy file for a Naive Dictionary of countries. Then, this was 
+replaced by the GeoDB.
+"""
 
-dict_countries = {
+COUNTRIES_DICT = {
 	'AD':'Andorra',
 	'AE':'United Arab Emirates',
 	'AF':'Afghanistan',
@@ -14,7 +16,7 @@ dict_countries = {
 	'AI':'Anguilla',
 	'AL':'Albania',
 	'AM':'Armenia',
-	'AN':'Antillas',
+	'AN':'Netherlands Antilles',
 	'AO':'Angola',
 	'AQ':'Antarctica',
 	'AR':'Argentina',
@@ -85,7 +87,7 @@ dict_countries = {
 	'FO':'Faroe Islands',
 	'FR':'France',
 	'GA':'Gabon',
-	'GB':'United Kingdom',
+	'GB':('United Kingdom','England','Northern Ireland','Wales','Scotland'),
 	'GD':'Grenada',
 	'GE':'Georgia',
 	'GF':'French Guiana',
@@ -220,7 +222,7 @@ dict_countries = {
 	'ST':'São Tomé and Príncipe',
 	'SV':'El Salvador',
 	'SX':'Sint Maarten',
-	'SY':'Syria',
+	'SY':('Syria', 'Syrian Arab Republic'),
 	'SZ':'Swaziland',
 	'TC':'Turks and Caicos Islands', 
 	'TD':'Chad',
@@ -237,7 +239,7 @@ dict_countries = {
 	'TT':'Trinidad and Tobago', 
 	'TV':'Tuvalu',
 	'TW':'Taiwan',
-	'TZ':'Tanzania',
+	'TZ':('Tanzania', 'United Republic of Tanzania'),
 	'UA':'Ukraine',
 	'UG':'Uganda',
 	'UM':'U.S. Minor Outlying Islands', 
@@ -259,13 +261,23 @@ dict_countries = {
 	'ZW':'Zimbabwe',
 	}
 
-def search(str):
-	if str in dict_countries:
-		return dict_countries[str]
+def searchByName(str):
+	for code, name in COUNTRIES_DICT.items():
+		if type(name) is tuple:
+			for elem in name:
+				if elem == str:
+					return code
+				else:
+					continue
+		else:
+			if name == str:
+				return code
+			else:
+				continue
+	return None
+
+def searchByCode(str):
+	if str in COUNTRIES_DICT:
+		return COUNTRIES_DICT[str]
 	else:
-		return False
-
-for i in range(1, 5000000):
-	vol = id_generator()
-	search(vol)
-
+		return None
