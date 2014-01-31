@@ -3,6 +3,11 @@
 
 import string, random
 
+"""
+This is just a dummy file for a Naive Dictionary of countries. Then, this was 
+replaced by the Geodict.
+"""
+
 COUNTRIES_DICT = {
 	'AD':'Andorra',
 	'AE':'United Arab Emirates',
