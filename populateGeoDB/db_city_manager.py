@@ -2,7 +2,6 @@ import csv, sys
 import db_config
 import db_manager
 import sqlscripts
-from geodict_lib import *
 
 def createCitiesTable(con):
 	db_manager.executeScripts(con, [sqlscripts.create_cities, sqlscripts.create_geom_cities])
@@ -19,8 +18,7 @@ def populateCitiesTable(con):
 			lon = row[5]
 		except:
 			continue
-		last_word, index, skipped = pull_word_from_end(city_name, len(city_name)-1, False)
-		params = [city_name, country_code, region_code, population, last_word, 'POINT(' + lon + ' ' + lat + ')', city_name, country_code]
+		params = [city_name, country_code, region_code, population, 'POINT(' + lon + ' ' + lat + ')', city_name, country_code]
 		db_manager.executeScriptsWithParam(con, [sqlscripts.insert_values_cities], [params])
 
 def createBigCitiesTable(con):
@@ -41,8 +39,7 @@ def populateBigCitiesTable(con):
 			feature_code = row[8]
 		except:
 			continue
-		last_word, index, skipped = pull_word_from_end(city_name, len(city_name)-1, False)
-		params = [city_name, country_code, country_name, region_code, region_name, population, last_word, 'POINT(' + lon + ' ' + lat + ')', city_name, country_code]
+		params = [city_name, country_code, country_name, region_code, region_name, population, 'POINT(' + lon + ' ' + lat + ')', city_name, country_code]
 		db_manager.executeScriptsWithParam(con, [sqlscripts.insert_values_big_cities], [params])
 
 def createClosestcityFunction(con):
