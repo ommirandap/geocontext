@@ -11,9 +11,9 @@ This step is only necesary if you wan to populate the geoDB with the latest info
 
 To accomplish this step, download the following files:
 
-http://download.geonames.org/export/dump/admin1CodesASCII.txt 
-http://download.geonames.org/export/dump/countryInfo.txt
-http://download.geonames.org/export/dump/cities5000.zip, extracting the cities5000.txt file
+- http://download.geonames.org/export/dump/admin1CodesASCII.txt 
+- http://download.geonames.org/export/dump/countryInfo.txt
+- http://download.geonames.org/export/dump/cities5000.zip, extracting the cities5000.txt file
 
 And replace those in the to_create_source_data/original_source_data
 
