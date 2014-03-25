@@ -16,6 +16,7 @@ Q_TWEETS_ID_FROM_EVENT 	= "SELECT tweet_id FROM tweet WHERE event_id_id = "
 Q_USERS_ID_FROM_EVENT 	= "SELECT user_id_id FROM tweet WHERE event_id_id = "
 Q_LOCATION_FROM_USER 	= "SELECT location FROM user WHERE user_id = "
 Q_COORD_FROM_TWEET 		= "SELECT coordinates FROM tweet WHERE tweet_id = "
+Q_USER_FROM_TWEET 		= "SELECT user_id_id FROM tweet WHERE tweet_id = "
 global lastEventDT
 global Count_Dict
 
@@ -101,7 +102,7 @@ def getLocationFromUserID(connection, ID_User):
 	try:
 		cursor = connection.cursor()
 		cursor.execute(Q_LOCATION_FROM_USER + str(ID_User))
-		return cursor.fetchone()
+		return  (cursor.fetchone())[0]
 	except MySQLdb.Error:
 		print "Error: unable to fetch data"
 		return -1
@@ -114,7 +115,7 @@ def getCoordinatesFromTweetID(connection, ID_tweet):
 	try:
 		cursor = connection.cursor()
 		cursor.execute(Q_COORD_FROM_TWEET + str(ID_tweet))
-		result = (connection.fetchone())[0]
+		result = (cursor.fetchone())[0]
 		if result == "None":
 			return None
 		else:
@@ -127,6 +128,18 @@ def getCoordinatesFromTweetID(connection, ID_tweet):
 				#a Location, this code should never be reached.
 				pass
 
+	except MySQLdb.Error:
+		print "Error: unable to fetch data"
+		return -1
+
+def getUserIDFromTweetID(connection, ID_tweet):
+	"""
+	Returns the user id for a tweet
+	"""
+	try:
+		cursor = connection.cursor()
+		cursor.execute(Q_USER_FROM_TWEET + str(ID_tweet))
+		return (cursor.fetchone())[0]
 	except MySQLdb.Error:
 		print "Error: unable to fetch data"
 		return -1
