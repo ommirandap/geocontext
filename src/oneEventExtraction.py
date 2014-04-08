@@ -6,21 +6,15 @@ from dstk import DSTK
 from GeoPoint import GeoPoint
 import CountryCodes as CD
 import LocationCleaner
-import BreaknewsDBInteractions as bnews
+import BreaknewsDBInteractions as cuboid
 
 def main():
-	connection = bnews.getConnection()
+	connection = cuboid.getConnection()
 	
-	array_events = bnews.getTodayEvents(connection)
+	array_events = cuboid.getTodayEvents(connection)
+
 	an_event = array_events[0]
-	event_id = an_event.eventID
-	event_tweets = bnews.getTweetsIDByEvent(connection, event_id)
-	for tweet in event_tweets:
-		coords = bnews.getCoordinatesFromTweetID(connection, tweet[0])
-		if coords is not None:
-			user_id = bnews.getUserIDFromTweetID(connection, tweet[0])
-			location = bnews.getLocationFromUserID(connection, user_id)
-			print tweet[0], ";", coords, ";" , user_id, ";", location, "\n"
+	print an_event
 	
 if __name__ == "__main__":
 	main()
