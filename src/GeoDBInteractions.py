@@ -2,6 +2,7 @@ import psycopg2 as PG
 import settings as k
 import Location
 from operator import itemgetter
+import sys
 
 """
 This file contains the main interactions with the local DB, which stores the
@@ -49,6 +50,21 @@ def searchCityName(connection, name):
 	param = [name]
 	cursor.execute(Q_CITIES_BY_NAME, param)
 	return cursor.fetchall()
+
+def getClosestCity(con, lat, lon):
+	try:
+		cur = con.cursor() 
+		sql = "select closestcity(%s,%s, 10)"
+		params = [lon, lat]
+		cur.execute(sql, params)
+		rows = cur.fetchall()
+		if len(rows) > 0:
+			return rows[0]
+		else:
+			return None
+	except psycopg2.DatabaseError, e:
+		print 'Error %s' % e    
+		sys.exit(1)
 
 def sbv6(d,reverse=False):
     return sorted(d.iteritems(), key=itemgetter(1), reverse=False)
