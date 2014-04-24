@@ -9,17 +9,18 @@ import GeoDBInteractions as geoDB
 def main():
 	connection = geoDB.getConnection()
 	#files_months = ['january', 'february', 'march']
-	files_months = ['february']
+	files_months = ['september']
 	path = '../data/'
-	comparing_locations_name_base = 'comparing_locations_'
-	comparing_locations_name_end = '2014_short.csv'
+	comparing_locations_name_base = 'comparing_locations_try_2'
+	comparing_locations_name_end = '2013.csv'
 
-	output_file_name_base = 'compared_statistics_3firstmonths_2014.txt'
+	output_file_name_base = 'compared_statistics_try_2_september2013.txt'
 	total_records = 0
 	equals_mydb_dstk = 0
 	equals_extracted_mydb = 0
 	equals_extracted_dstk = 0
 	empty_locations = 0
+	nulls_locations = 0
 
 	for month in files_months:
 		compared_locations = open(path + comparing_locations_name_base + month + comparing_locations_name_end, 'r')
@@ -29,11 +30,6 @@ def main():
 			code_dstk = data[6]			
 			code_mydb = data[7]
 			code_extracted = data[8]
-
-			print 'code_dstk: ' + code_dstk
-			print 'code_mydb : ' + code_mydb
-			print 'code_extracted: ' + code_extracted
-			
 			if code_mydb == code_dstk:
 				equals_mydb_dstk += 1
 
@@ -42,19 +38,20 @@ def main():
 
 			if code_dstk == code_extracted:
 				equals_extracted_dstk += 1
-			else:
-				print 'asdf!'
+			if code_extracted == 'null' or code_extracted == 'NONE' or code_extracted == 'None':
+				nulls_locations += 1
 
 			if data[5] == "":
 				empty_locations += 1
 
 			total_records += 1
 
-	output = open(path + output_file_name_base + '_test', 'w')
+	output = open(path + output_file_name_base, 'w')
 	output.write('Total records: ' + str(total_records) + '\n')
 	output.write('equals_mydb_dstk: ' + str(equals_mydb_dstk) + '\n')
 	output.write('equals_extracted_mydb: ' + str(equals_extracted_mydb) + '\n')
 	output.write('equals_extracted_dstk: ' + str(equals_extracted_dstk) + '\n')
 	output.write('Empty locations: ' + str(empty_locations) + '\n')
+	output.write('Null locations: ' + str(nulls_locations) + '\n')
 if __name__ == '__main__':
 	main()

@@ -30,6 +30,15 @@ def main():
 
 	print  d.coordinates2politics((0.0,0.0)) #something
 
+	santiago = d.coordinates2politics((-33.46, -70.64)), '\n' #Santiago
+	print santiago
+	print getCountryCodeFromDSTK(connection,santiago)
+
+	korea = d.coordinates2politics((37.9044774,127.0651855)), '\n' #Santiago
+	print korea
+	#print getCountryCodeFromDSTK(connection,korea)
+
+
 
 	print "My DB:"
 	print geoDB.getClosestCountry(connection,41.897314250000001,-87.619115649999998)#Chicago  IL
